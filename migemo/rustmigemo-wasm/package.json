@@ -1,0 +1,15 @@
+{
+  "name": "rustmigemo",
+  "collaborators": [
+    "oguna <nao.lk.118@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "rustmigemo_bg.wasm",
+    "rustmigemo.js",
+    "rustmigemo_bg.js",
+    "rustmigemo.d.ts"
+  ],
+  "main": "rustmigemo.js",
+  "types": "rustmigemo.d.ts"
+}
