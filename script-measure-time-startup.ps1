@@ -21,3 +21,9 @@ $a = "migemo/cmigemo/cmigemo.exe -w kensaku"
 echo rustmigemo-wasm
 $a = "node .\migemo\rustmigemo-wasm-cli.js -d dict/migemo-compact-dict -w kensaku"
 (Measure-Command {invoke-expression $a | Out-Null}).TotalMilliseconds
+
+echo pymigemo
+cd migemo
+$a = "python -m pymigemo -w kensaku"
+(Measure-Command {invoke-expression $a | Out-Null}).TotalMilliseconds
+cd ..

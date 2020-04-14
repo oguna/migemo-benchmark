@@ -21,3 +21,8 @@ echo cmigemo
 echo rustmigemo-wasm
 #$a = "node .\migemo\rustmigemo-wasm-cli.js -d dict/migemo-compact-dict -q"
 (Measure-Command {cat dataset/all_ruby.txt | node .\migemo\rustmigemo-wasm-cli.js -d dict/migemo-compact-dict -q | Out-Null}).TotalMilliseconds
+
+echo pymigemo
+cd migemo
+(Measure-Command {cat ../dataset/all_ruby.txt | python -m pymigemo -q | Out-Null}).TotalMilliseconds
+cd ..
