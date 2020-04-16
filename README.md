@@ -1,14 +1,14 @@
 # migemo-benchmark
 
-| | C/Migemo | gomigemo | rustmigemo | jsmigemo | jmigemo | rustmigemo-wasm | pymigmeo |
-| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| 言語 | C | Go | Rust | TypeScript | Java | Rust→WASM | Python |
-| ランタイム | Native | Native | Native | Node.js | JVM | Node.js | CPython |
-| 実行ファイルサイズ (KB) | **72** | 2001 | 358 | N/A | N/A | N/A | N/A |
-| 辞書ファイルサイズ (MB) | 4.78 | **2.03** | **2.03** | **2.03** | **2.03** | **2.03** | **2.03** |
-| メモリ使用量 (BM) | 26.1 | 10.9 | 7.7 | 14.7 | 15.5 | 14.4 | **6.5** |
-| 起動時間 (ms) | 198 | 109 | **65** | 162 | 234 | 150 | 462 |
-| クエリ時間 (ms) | **5053** | 13429 | 14939 | 57261 | 15892 | 14618 | 119909 |
+| | C/Migemo | gomigemo | rustmigemo | jsmigemo | jmigemo | rustmigemo-wasm | pymigmeo | csmigemo |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 言語 | C | Go | Rust | TypeScript | Java | Rust→WASM | Python | C# |
+| ランタイム | Native | Native | Native | Node.js | JVM | Node.js | CPython | .NET Core |
+| 実行ファイルサイズ (KB) | **72** | 2001 | 358 | N/A | N/A | N/A | N/A | N/A |
+| 辞書ファイルサイズ (MB) | 4.78 | **2.03** | **2.03** | **2.03** | **2.03** | **2.03** | **2.03** | **2.03** |
+| メモリ使用量 (BM) | 26.1 | 10.9 | 7.7 | 14.7 | 15.5 | 14.4 | 6.5 | **6.4** |
+| 起動時間 (ms) | 198 | 109 | **65** | 162 | 234 | 150 | 462 | 147 |
+| クエリ時間 (ms) | **5053** | 13429 | 14939 | 57261 | 15892 | 14618 | 119909 | 17493 |
 
 ※ 実行ファイルサイズのN/Aは、プログラムの実行にはランタイムが必要であり、比較の対象としていないことを示します。
 
@@ -38,6 +38,8 @@ v12.16.1
 go version go1.14 windows/amd64
 # python
 Python 3.8.0
+# csharp
+3.1.201
 # windows
 Microsoft Windows 10 Home
 10.0.19041

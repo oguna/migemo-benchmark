@@ -27,3 +27,6 @@ cd migemo
 $a = "python -m pymigemo -w kensaku"
 (Measure-Command {invoke-expression $a | Out-Null}).TotalMilliseconds
 cd ..
+
+echo csmigemo
+(Measure-Command {"" | migemo/csmigemo/CsMigemo | Out-Null}).TotalMilliseconds

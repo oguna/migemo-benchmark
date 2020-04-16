@@ -8,6 +8,8 @@ echo "# go"
 go version
 echo "# python"
 python --version
+echo "# csharp"
+dotnet --version
 echo "# windows"
 (Get-WmiObject Win32_OperatingSystem).Caption
 (Get-WmiObject Win32_OperatingSystem).Version

@@ -26,3 +26,6 @@ echo pymigemo
 cd migemo
 (Measure-Command {cat ../dataset/all_ruby.txt | python -m pymigemo -q | Out-Null}).TotalMilliseconds
 cd ..
+
+echo csmigemo
+(Measure-Command {cat dataset/all_ruby.txt | migemo/csmigemo/CsMigemo.exe | Out-Null}).TotalMilliseconds
