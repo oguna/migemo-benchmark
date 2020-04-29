@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const RegexGenerator_1 = require("./RegexGenerator");
 const RomajiProcessor_1 = require("./RomajiProcessor");
 const CharacterConverter_1 = require("./CharacterConverter");
+const TernaryRegexGenerator_1 = require("./TernaryRegexGenerator");
 class Migemo {
     constructor() {
         this.dict = null;
         this.rxop = null;
     }
     queryAWord(word) {
-        let generator = this.rxop == null ? RegexGenerator_1.RegexGenerator.getDEFAULT() : new RegexGenerator_1.RegexGenerator(this.rxop[0], this.rxop[1], this.rxop[2], this.rxop[3], this.rxop[4], this.rxop[5]);
+        let generator = this.rxop == null ? TernaryRegexGenerator_1.TernaryRegexGenerator.getDEFAULT() : new TernaryRegexGenerator_1.TernaryRegexGenerator(this.rxop[0], this.rxop[1], this.rxop[2], this.rxop[3], this.rxop[4], this.rxop[5]);
         // query自信はもちろん候補に加える
         generator.add(word);
         // queryそのものでの辞書引き

@@ -67,13 +67,26 @@ class BitVector {
     lowerBoundBinarySearchLB(key, b) {
         let high = this.lb.length;
         let low = -1;
-        while (high - low > 1) {
-            let mid = (high + low) >>> 1;
-            if ((b ? this.lb[mid] : 512 * mid - this.lb[mid]) < key) {
-                low = mid;
+        if (b) {
+            while (high - low > 1) {
+                let mid = (high + low) >>> 1;
+                if (this.lb[mid] < key) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
             }
-            else {
-                high = mid;
+        }
+        else {
+            while (high - low > 1) {
+                let mid = (high + low) >>> 1;
+                if (512 * mid - this.lb[mid] < key) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
             }
         }
         return high;
@@ -81,13 +94,26 @@ class BitVector {
     lowerBoundBinarySearchSB(key, fromIndex, toIndex, b) {
         let high = toIndex;
         let low = fromIndex - 1;
-        while (high - low > 1) {
-            let mid = (high + low) >>> 1;
-            if ((b ? this.sb[mid] : 64 * (mid & 7) - this.sb[mid]) < key) {
-                low = mid;
+        if (b) {
+            while (high - low > 1) {
+                let mid = (high + low) >>> 1;
+                if (this.sb[mid] < key) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
             }
-            else {
-                high = mid;
+        }
+        else {
+            while (high - low > 1) {
+                let mid = (high + low) >>> 1;
+                if (64 * (mid & 7) - this.sb[mid] < key) {
+                    low = mid;
+                }
+                else {
+                    high = mid;
+                }
             }
         }
         return high;

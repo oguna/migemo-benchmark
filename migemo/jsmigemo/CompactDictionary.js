@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const LOUDSTrie_1 = require("./LOUDSTrie");
 const BitVector_1 = require("./BitVector");
+const BitList_1 = require("./BitList");
 class CompactDictionary {
     constructor(buffer) {
         let dv = new DataView(buffer);
@@ -28,6 +29,7 @@ class CompactDictionary {
         if (offset != buffer.byteLength) {
             throw new Error();
         }
+        this.hasMappingBitList = CompactDictionary.createHasMappingBitList(this.mappingBitVector);
     }
     static readTrie(dv, offset, compactHiragana) {
         let keyTrieEdgeSize = dv.getInt32(offset);
@@ -77,9 +79,20 @@ class CompactDictionary {
         }
         throw new RangeError();
     }
+    static createHasMappingBitList(mappingBitVector) {
+        let numOfNodes = mappingBitVector.rank(mappingBitVector.size() + 1, false);
+        let bitList = new BitList_1.BitList(numOfNodes);
+        let bitPosition = 0;
+        for (let node = 1; node < numOfNodes; node++) {
+            let hasMapping = mappingBitVector.get(bitPosition + 1);
+            bitList.set(node, hasMapping);
+            bitPosition = mappingBitVector.nextClearBit(bitPosition + 1);
+        }
+        return bitList;
+    }
     *search(key) {
         let keyIndex = this.keyTrie.get(key);
-        if (keyIndex != -1) {
+        if (keyIndex != -1 && this.hasMappingBitList.get(keyIndex)) {
             let valueStartPos = this.mappingBitVector.select(keyIndex, false);
             let valueEndPos = this.mappingBitVector.nextClearBit(valueStartPos + 1);
             let size = valueEndPos - valueStartPos - 1;
@@ -96,14 +109,15 @@ class CompactDictionary {
     *predictiveSearch(key) {
         let keyIndex = this.keyTrie.get(key);
         if (keyIndex > 1) {
-            var result = new Array();
             for (let i of this.keyTrie.iterator(keyIndex)) {
-                let valueStartPos = this.mappingBitVector.select(i, false);
-                let valueEndPos = this.mappingBitVector.nextClearBit(valueStartPos + 1);
-                let size = valueEndPos - valueStartPos - 1;
-                let offset = this.mappingBitVector.rank(valueStartPos, false);
-                for (let j = 0; j < size; j++) {
-                    yield this.valueTrie.getKey(this.mapping[valueStartPos - offset + j]);
+                if (this.hasMappingBitList.get(i)) {
+                    let valueStartPos = this.mappingBitVector.select(i, false);
+                    let valueEndPos = this.mappingBitVector.nextClearBit(valueStartPos + 1);
+                    let size = valueEndPos - valueStartPos - 1;
+                    let offset = this.mappingBitVector.rank(valueStartPos, false);
+                    for (let j = 0; j < size; j++) {
+                        yield this.valueTrie.getKey(this.mapping[valueStartPos - offset + j]);
+                    }
                 }
             }
         }

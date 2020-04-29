@@ -20,8 +20,7 @@ class CompactDictionaryBuilder {
         }
         // build key trie
         const keys = Array.from(dict.keys()).sort();
-        const generatedKeyIndex = new Uint32Array(keys.length);
-        const keyTrie = LOUDSTrieBuilder_1.LOUDSTrieBuilder.build(keys, generatedKeyIndex);
+        const keyTrie = LOUDSTrieBuilder_1.LOUDSTrieBuilder.build(keys)[0];
         // build value trie
         const valuesSet = new Set();
         for (const value of dict.values()) {
@@ -30,7 +29,7 @@ class CompactDictionaryBuilder {
             }
         }
         const values = Array.from(valuesSet.values()).sort();
-        const valueTrie = LOUDSTrieBuilder_1.LOUDSTrieBuilder.build(values);
+        const valueTrie = LOUDSTrieBuilder_1.LOUDSTrieBuilder.build(values)[0];
         // build trie mapping
         let mappingCount = 0;
         for (const i of dict.values()) {
