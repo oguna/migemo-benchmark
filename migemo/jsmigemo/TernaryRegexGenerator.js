@@ -184,7 +184,7 @@ class TernaryRegexGenerator {
                 }
             }
             if (haschild > 1) {
-                buf += buf.substr(0, buf.length - 1);
+                buf = buf.substr(0, buf.length - 1);
             }
         }
         if (brother > 1 && haschild > 0) {
