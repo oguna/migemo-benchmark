@@ -1,5 +1,18 @@
 # migemo-benchmark
 
+## 比較対象
+
+- [C/Migemo](https://github.com/koron/cmigemo)
+- [gomigemo](https://github.com/oguna/gomigemo)
+- [rustmigemo](https://github.com/oguna/rustmigemo)
+- [jsmigemo](https://github.com/oguna/jsmigemo)
+- [jmigemo](https://github.com/oguna/jmigemo)
+- [rustmigemo-wasm](https://github.com/oguna/rustmigemo/tree/dev-wasm)
+- [pymigemo](https://github.com/oguna/pymigemo)
+- [csmigemo](https://github.com/oguna/csmigemo)
+
+## 結果
+
 | | C/Migemo | gomigemo | rustmigemo | jsmigemo | jmigemo | rustmigemo-wasm | pymigmeo | csmigemo |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | 言語 | C | Go | Rust | TypeScript | Java | Rust→WASM | Python | C# |
